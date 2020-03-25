@@ -1,0 +1,12 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "go.testOnSave": true,
+    "go.formatTool": "gofmt",
+    "go.autocompleteUnimportedPackages": true,
+    "go.coverOnSave": true,
+    "go.coverOnSingleTestFile": true,
+    "go.coverOnSingleTest": true
+}
