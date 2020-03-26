@@ -3,6 +3,8 @@ package config
 import (
 	"GoApiExample/pkg/utilities/config/model"
 	"os"
+
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func LoadConfiguration() (*model.Configuration, error) {
@@ -17,23 +19,22 @@ func LoadConfiguration() (*model.Configuration, error) {
 	}
 
 	return &model.Configuration {
-		MongoCollections: databases,
+		Database: databases,
 		Settings: settings,
 	}, nil
 }
 
-func LoadDatabases()(map[string]model.MongoDatabase, error) {
-	databases := make(map[string]model.MongoDatabase)
+func LoadDatabases()(model.MongoDatabase, error) {
+	collections := make(map[string]*mongo.Collection)
 
-	databases[os.Getenv("MongoDataBaseCollection_Admin")] = model.MongoDatabase{
-		Uri: os.GetEnv("MongoDataBaseUri_Admin"),
-		Database: os.GetEnv("MongoDataBaseDB_Admin"),
-		CollectionName: os.GetEnv("MongoDataBaseCollection_Admin"),
-	}
-	databases[os.Getenv("MongoDataBaseCollection_User")] = model.MongoDatabase{
-		Uri: os.GetEnv("MongoDataBaseUri_User"),
-		Database: os.GetEnv("MongoDataBaseDB_User"),
-		CollectionName: os.GetEnv("MongoDataBaseCollection_User"),
+	collections[os.Getenv("MongoDataBaseCollection_Admin")] = nil
+	collections[os.Getenv("MongoDataBaseCollection_User")] = nil
+	
+
+	databases := model.MongoDatabase{
+		Uri: os.Getenv("MongoDataBaseUri_Admin"),
+		Database: os.Getenv("MongoDataBaseDB_Admin"),
+		Collections: collections,
 	}
 
 	return databases, nil

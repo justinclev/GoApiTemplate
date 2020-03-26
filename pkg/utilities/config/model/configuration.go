@@ -1,12 +1,14 @@
 package model
 
+import "go.mongodb.org/mongo-driver/mongo"
+
 type MongoDatabase struct {
 	Uri string
-	Database string
-	CollectionName string
+	Name string
+	Collections map[string]*mongo.Collection
 }
 
 type Configuration struct {
-	MongoCollections map[string]MongoDatabase
+	Database MongoDatabase
 	Settings map[string]string
 }
